@@ -8,17 +8,21 @@ export function login(data) {
   })
 }
 
-export function getInfo(token) {
+export function getUserInfo() {
   return request({
-    url: '/vue-admin-template/user/info',
-    method: 'get',
-    params: { token }
+    url: '/sys/profile',
+    method: 'post'
   })
 }
 
-export function logout() {
+/**
+ * 获取员工的基本信息
+ * @param {*} id 用户id
+ * @returns Promise
+ */
+export function getUserBaseInfo(id) {
   return request({
-    url: '/vue-admin-template/user/logout',
-    method: 'post'
+    url: `/sys/user/${id}`,
+    method: 'get'
   })
 }

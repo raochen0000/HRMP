@@ -10,6 +10,10 @@ router.beforeEach((to, from, next) => {
   NProgress.start() // 开启进度条
   // 判断有无token
   if (store.getters.token) {
+    // 有token，但无用户信息，就发起请求
+    if (!store.getters.userId) {
+      store.dispatch('user/getUserInfo')
+    }
     // 有token，是否去登录页
     if (to.path === '/login') {
       next('/')
