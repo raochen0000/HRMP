@@ -1,13 +1,9 @@
 import router from './router'
 import store from './store'
-// import { Message } from 'element-ui'
-import NProgress from 'nprogress' // progress bar
-import 'nprogress/nprogress.css' // progress bar style
 
 const whiteList = ['/login', '/404'] // 定义路由白名单
 
 router.beforeEach((to, from, next) => {
-  NProgress.start() // 开启进度条
   // 判断有无token
   if (store.getters.token) {
     // 有token，但无用户信息，就发起请求
@@ -28,9 +24,5 @@ router.beforeEach((to, from, next) => {
       next()
     }
   }
-  NProgress.done() // 强制关闭进度条
 })
 
-router.afterEach(() => {
-  NProgress.done() // 路由跳转成功关闭进度条
-})

@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
 import store from '@/store'
+import NProgress from 'nprogress' // progress bar
+import 'nprogress/nprogress.css' // progress bar style
 
 // create an axios instance
 const service = axios.create({
@@ -10,6 +12,7 @@ const service = axios.create({
 
 // request interceptor
 service.interceptors.request.use(config => {
+  NProgress.start() // 开启进度条
   const token = store.getters.token
   if (token) {
     config.headers.Authorization = 'Bearer ' + token
@@ -21,6 +24,7 @@ service.interceptors.request.use(config => {
 
 // response interceptor
 service.interceptors.response.use(res => {
+  NProgress.done() // 关闭进度条
   const { success, data, message } = res.data
   if (success) {
     return data
@@ -29,7 +33,7 @@ service.interceptors.response.use(res => {
     return Promise.reject(message)
   }
 }, err => {
-  console.dir(err)
+  NProgress.done() // 关闭进度条
   if (err.response && err.response.status === 404) {
     return Message.error('连接服务器失败！')
   }
