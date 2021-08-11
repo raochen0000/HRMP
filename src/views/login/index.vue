@@ -106,9 +106,13 @@ export default {
       })
     },
     handleLogin() {
-      this.$refs.loginForm.validate(valid => {
+      this.$refs.loginForm.validate(async valid => {
         if (!valid) return
-        this.login(this.loginForm)
+        this.loading = true
+        try {
+          await this.login(this.loginForm)
+          this.$router.push('/')
+        } finally { this.loading = false }
       })
     }
   }
