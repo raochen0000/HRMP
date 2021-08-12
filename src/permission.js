@@ -3,12 +3,12 @@ import store from './store'
 
 const whiteList = ['/login', '/404'] // 定义路由白名单
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async(to, from, next) => {
   // 判断有无token
   if (store.getters.token) {
     // 有token，但无用户信息，就发起请求
     if (!store.getters.userId) {
-      store.dispatch('user/getUserInfo')
+      await store.dispatch('user/getUserInfo')
     }
     // 有token，是否去登录页
     if (to.path === '/login') {

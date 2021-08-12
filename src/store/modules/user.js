@@ -1,5 +1,5 @@
 import { getUserBaseInfo, getUserInfo, login } from '@/api/user'
-import { getToken, setToken, removeToken } from '@/utils/auth'
+import { getToken, setToken, removeToken, setTokenTime } from '@/utils/auth'
 const state = {
   token: getToken(),
   userInfo: {} // 用户信息
@@ -26,6 +26,8 @@ const actions = {
   async login(context, data) {
     const token = await login(data)
     context.commit('setToken', token)
+    // 设置token时间戳
+    setTokenTime()
   },
   // 获取用户信息
   async getUserInfo(context) {

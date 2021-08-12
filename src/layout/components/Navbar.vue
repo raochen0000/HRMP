@@ -10,8 +10,8 @@
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
-          <img src="@/assets/common/bigUserHeader.png" class="user-avatar">
-          <span class="user-name">超级管理员</span>
+          <img v-imgError="defaultImg" :src="avatar" class="user-avatar">
+          <span class="user-name">{{ username }}</span>
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
@@ -32,15 +32,22 @@
 <script>
 import { mapGetters } from 'vuex'
 import Hamburger from '@/components/Hamburger'
+// import defaultImg from '@/assets/common/bigUserHeader.png'
 
 export default {
   components: {
     Hamburger
   },
+  data() {
+    return {
+      defaultImg: require('@/assets/common/bigUserHeader.png')
+    }
+  },
   computed: {
     ...mapGetters([
       'sidebar',
-      'avatar'
+      'avatar',
+      'username'
     ])
   },
   methods: {
