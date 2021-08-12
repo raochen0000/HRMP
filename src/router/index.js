@@ -5,6 +5,14 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '@/layout'
+import approvals from './modules/approvals'
+import attendances from './modules/attendances'
+import departments from './modules/departments'
+import employees from './modules/employees'
+import permission from './modules/permission'
+import salarys from './modules/salarys'
+import setting from './modules/setting'
+import social from './modules/social'
 
 // 静态路由：所有人都可以访问
 export const constantRoutes = [
@@ -28,7 +36,7 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: { title: '首页', icon: 'dashboard' }
     }]
   },
 
@@ -37,11 +45,21 @@ export const constantRoutes = [
 ]
 
 // 动态路由：需要特定权限才能访问
+export const varRoutes = [
+  approvals,
+  attendances,
+  departments,
+  employees,
+  permission,
+  salarys,
+  setting,
+  social
+]
 
 const createRouter = () => new Router({
   // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
-  routes: constantRoutes
+  routes: [...constantRoutes, ...varRoutes]
 })
 
 const router = createRouter()

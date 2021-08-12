@@ -46,7 +46,7 @@
       <el-button class="loginBtn" :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
 
       <div class="tips">
-        <span style="margin-right:20px;">账号: 13800000002</span>
+        <span style="margin-right:20px;">账号: 13800000004</span>
         <span> 密码: 123456</span>
       </div>
 

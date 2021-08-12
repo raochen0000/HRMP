@@ -56,7 +56,7 @@ service.interceptors.response.use(res => {
 })
 
 function isTokenTimeOut() {
-  const tokenLife = 50
+  const tokenLife = 3600
   const tokenTime = (Date.now() - getTokenTime()) / 1000
   return tokenTime > tokenLife
 }
