@@ -6,3 +6,10 @@ export function getDepartmentListAPI() {
     url: '/company/department'
   })
 }
+
+export function delOrganizeAPI(id) {
+  return request({
+    method: 'delete',
+    url: '/company/department/' + id
+  })
+}
