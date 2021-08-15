@@ -13,3 +13,11 @@ export function delOrganizeAPI(id) {
     url: '/company/department/' + id
   })
 }
+
+export function addDepartmentAPI(data) {
+  return request({
+    method: 'post',
+    url: '/company/department',
+    data
+  })
+}

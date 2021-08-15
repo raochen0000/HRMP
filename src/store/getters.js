@@ -5,6 +5,8 @@ const getters = {
   token: state => state.user.token,
   userId: state => state.user.userInfo.userId,
   username: state => state.user.userInfo.username,
-  avatar: state => state.user.userInfo.staffPhoto
+  avatar: state => state.user.userInfo.staffPhoto,
+  // 映射权限菜单
+  menus: state => state.user.menus
 }
 export default getters

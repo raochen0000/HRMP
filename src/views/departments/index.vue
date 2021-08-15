@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-card class="tree-card">
       <!-- 用了一个行列布局 -->
-      <Row :treedata="company" />
+      <Row :treedata="company" @onAdd="addDepartment" />
       <!-- 树形结构 -->
       <el-tree :data="treeData">
         <template slot-scope="{ data }">
@@ -15,6 +15,7 @@
       :dialog-visible="addDialogVisible"
       :tree-node="treeNode"
       @closeDialog="addDialogVisible = false"
+      @updata="getDepartmentList"
     />
   </div>
 </template>
@@ -37,7 +38,8 @@ export default {
       // 公司信息
       company: {
         name: '',
-        manager: '负责人'
+        manager: '负责人',
+        isRoot: true
       },
       addDialogVisible: false,
       treeNode: {}
@@ -53,6 +55,7 @@ export default {
       const res = await getDepartmentListAPI()
       this.company.name = res.companyName
       this.treeData = listToTree(res.depts, '')
+      this.company.children = this.treeData
     },
     // 添加新的子部门
     addDepartment(val) {
