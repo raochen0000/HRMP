@@ -70,8 +70,7 @@ export default {
         name: '',
         code: '',
         introduce: '',
-        manager: '',
-        pid: ''
+        manager: ''
       },
       formRules: {
         name: [
@@ -109,8 +108,8 @@ export default {
     submitForm() {
       this.$refs.formRef.validate(async(valid) => {
         if (valid) {
-          const res = await addDepartmentAPI(this.formData)
-          console.log(res)
+          // 新增子部门的pid为当前父级部门的id
+          await addDepartmentAPI({ ...this.formData, pid: this.treeNode.id })
           this.closeDialog()
           this.$emit('updata')
           this.$message.success('添加新的子部门成功')
